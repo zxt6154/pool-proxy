@@ -1,0 +1,55 @@
+language: python
+
+jobs:
+  include:
+    - name: "Python 3.6 on Linux"
+      python: "3.6"
+      os: "linux"
+      env:
+        - PYTHON=python3
+        - PIP=pip3
+    - name: "Python 3.7 on Linux"
+      python: "3.7"
+      os: "linux"
+      env:
+        - PYTHON=python3
+        - PIP=pip3
+    - name: "Python 3.8 on Linux"
+      python: "3.8"
+      os: "linux"
+      env:
+        - PYTHON=python3
+        - PIP=pip3
+    - name: "Python 3.7 on macOS"
+      os: osx
+      osx_image: xcode11.2
+      language: shell
+      env:
+        - PYTHON=python3
+        - PIP=pip3
+    - name: "Python 3.6 on Windows"
+      os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.6.8
+      env:
+        - PATH=/c/Python36:/c/Python36/Scripts:$PATH
+        - PYTHON=python
+        - PIP=pip
+    - name: "Python 3.7 on Windows"
+      os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.7.4
+      env:
+        - PATH=/c/Python37:/c/Python37/Scripts:$PATH
+        - PYTHON=python
+        - PIP=pip
+
+install:
+  - $PYTHON --version
+  - $PIP install -r requirements.txt
+
+script:
+  - $PYTHON --version
+  - $PYTHON main.py citest
